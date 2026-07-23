@@ -1,6 +1,6 @@
 ---
-name: onboarding
-description: Onboard a developer to the current repository. Scans the codebase, existing docs, config, and git history (read-only) to produce a durable ONBOARDING.md and then answer questions about how the project works. Use when someone is new to a repo, asks to "onboard me", "explain this codebase", "how do I get started here", or "give me a tour of the repo".
+name: onboard-me
+description: Onboard a developer to the current repository. Scans the codebase, existing docs, and config (read-only) to produce a durable ONBOARDING.md — stack, directory structure, setup, PR process, deployment, and useful links — and then answers questions about how the project works. Use when someone is new to a repo, asks to "onboard me", "explain this codebase", "how do I get started here", or "give me a tour of the repo".
 ---
 
 # Repository Onboarding
@@ -41,6 +41,10 @@ Build a picture of what exists before reading deeply.
 - Glob for config: `.env.example`, `docker-compose*`, `Dockerfile`, CI configs
   (`.github/workflows/**`, `.gitlab-ci.yml`, `.circleci/**`), lint/format
   configs, `Makefile`/`Justfile`/`Taskfile`.
+- Glob for process/deploy signals: `CONTRIBUTING*`, PR templates
+  (`.github/pull_request_template.md`, `.github/PULL_REQUEST_TEMPLATE/**`),
+  deploy configs (`vercel.json`, `netlify.toml`, `fly.toml`, `render.yaml`,
+  `k8s/**`, Helm `Chart.yaml`).
 
 ### 2. Detect the stack
 
@@ -49,56 +53,66 @@ package managers, frameworks, and runtimes. A repo may be polyglot — record al
 of them. Note the primary language (most source files / the one the entry point
 is in).
 
-### 3. Extract the quickstart
+### 3. Map the directory structure
 
-This is what a new dev needs first. Pull — do not run — the exact commands for:
+Explain what lives where — this is the section newcomers reach for most.
 
+- Walk the significant top-level (and notable nested) directories.
+- For each, state its purpose in one line: what kind of code/assets it holds and
+  what part of the system it serves (e.g. `src/api/` — HTTP route handlers,
+  `migrations/` — database schema changes).
+- Note where the main entry point(s) live.
+- Skip noise (`node_modules`, `.git`, build output, vendored deps).
+
+### 4. Extract the setup
+
+This is what a new dev needs first. Pull — do not run — the exact steps for:
+
+- Prerequisites (runtime versions, tools to install first)
 - Install / bootstrap dependencies
-- Build
+- Configure environment (env vars from `.env.example`; what each is for)
+- Build (if applicable)
 - Run (dev server, CLI, main entry point)
 - Test
-- Required env vars (from `.env.example`) and external services (from
-  docker-compose / docs)
+- Local services required (from docker-compose / docs)
 
 Source commands from README, `CONTRIBUTING`, `Makefile`/task runner, and the
 `scripts` section of the manifest. Prefer the manifest/task-runner over prose
 when they conflict, and note the conflict.
 
-### 4. Map the architecture
+### 5. Conventions, PR process & deployment
 
-- Identify entry points (main file, CLI command, server bootstrap, route
-  registration, exported package API).
-- Trace module/package boundaries: what are the top-level components and what
-  does each own?
-- Name the key abstractions (core types, base classes, central interfaces) and
-  where they live.
-- List external integrations (databases, queues, third-party APIs, cloud
-  services) inferred from config and dependencies.
-- Produce a **Mermaid** `flowchart` of the main components and their
-  relationships for the artifact.
+- **Conventions** — testing framework and where tests live, lint/format tooling,
+  commit style, and any code-style notes from `CONTRIBUTING`/`CLAUDE.md`.
+- **PR process** (only if documented) — from `CONTRIBUTING`, PR templates, and
+  CI: branch naming, where to branch from, required checks, review/approval
+  rules, and any PR template that must be filled in. If nothing is documented,
+  record that plainly rather than inventing a process.
+- **Deployment** (only if present) — from CI/CD configs, `Dockerfile`, and
+  platform configs (Vercel/Fly/Render/k8s/Helm): how/where it deploys, what
+  triggers a deploy, and which environments exist. If absent, record that.
 
-### 5. Read git history (read-only)
+### 6. Documentation & useful links
 
-- Recent commits (`git log --oneline -30`) to sense current direction.
-- Hot files: `git log --pretty=format: --name-only -100 | sort | uniq -c |
-  sort -rg | head -20` — the most-changed files signal where the action is.
-- Identify which areas look actively maintained vs. dormant.
+Collect pointers a newcomer will want: README/docs site, `CONTRIBUTING`,
+`ARCHITECTURE`, ADRs, and any external links surfaced in the docs (wiki, API
+reference, dashboards, issue tracker, chat channels, project homepage).
 
-### 6. Assemble reading list & glossary
+### 7. Assemble reading list & glossary
 
 - **Start here** — an ordered list of 5–10 files a newcomer should read, each
   with one line on why.
 - **Glossary** — domain-specific terms found in code/docs, with plain-language
   definitions, so the newcomer learns the project's vocabulary.
 
-### 7. Write the artifact
+### 8. Write the artifact
 
 Ask the user to confirm before writing (it's the only file you create). Then
 write `ONBOARDING.md` at the repo root using the structure in
 `references/onboarding-template.md`. Fill every section from your findings; omit
 a section only if genuinely not applicable, and say so.
 
-### 8. Offer Q&A
+### 9. Offer Q&A
 
 After writing, tell the user the doc is ready and invite grounded questions
 ("ask me anything about this repo"). Answer from files you read; read more as
