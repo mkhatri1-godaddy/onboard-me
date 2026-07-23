@@ -1,0 +1,16 @@
+{
+  "name": "onboarding-marketplace",
+  "owner": {
+    "name": "Monish Khatri"
+  },
+  "metadata": {
+    "description": "Marketplace hosting the onboarding plugin — get productive in any repo fast."
+  },
+  "plugins": [
+    {
+      "name": "onboarding",
+      "source": "./",
+      "description": "Scans a repo, its docs, and git history (read-only) to produce a durable ONBOARDING.md and answer questions about the codebase."
+    }
+  ]
+}
