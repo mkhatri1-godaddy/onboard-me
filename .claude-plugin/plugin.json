@@ -1,5 +1,5 @@
 {
-  "name": "onboarding",
+  "name": "onboard-me",
   "version": "0.1.0",
   "description": "Onboard yourself to any repository. Scans the codebase, docs, and git history to produce a durable ONBOARDING.md and answer questions about how the project works.",
   "author": {

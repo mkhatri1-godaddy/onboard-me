@@ -1,0 +1,41 @@
+{
+  "name": "onboard-me",
+  "version": "0.1.0",
+  "description": "Install the onboard-me Claude Code skill: scans a repo, its docs, and git history (read-only) to produce a durable ONBOARDING.md and answer questions about the codebase.",
+  "bin": {
+    "onboard-me": "bin/install.js"
+  },
+  "files": [
+    "bin/",
+    "skills/",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=16.7.0"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "skill",
+    "onboarding",
+    "documentation",
+    "codebase",
+    "developer-experience",
+    "repo-tour"
+  ],
+  "author": "Monish Khatri",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkhatri1-godaddy/onboard-me.git"
+  },
+  "homepage": "https://github.com/mkhatri1-godaddy/onboard-me#readme",
+  "bugs": {
+    "url": "https://github.com/mkhatri1-godaddy/onboard-me/issues"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
+}
