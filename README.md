@@ -34,22 +34,6 @@ as slash commands:
 /plugin install onboard-me@onboard-me-marketplace
 ```
 
-### With npx
-
-No clone, no global install — one command copies the skill into your Claude Code
-skills directory:
-
-```bash
-npx @monish-khatri/onboard-me            # install for your user  (~/.claude/skills/onboard-me)
-npx @monish-khatri/onboard-me --project  # install into the current repo (./.claude/skills/onboard-me)
-npx @monish-khatri/onboard-me --force    # overwrite an existing install (use to update)
-```
-
-Then start Claude Code in any repository and run `/onboard-me`.
-
-> Requires Node ≥ 16.7. Installing per-user makes the skill available in every
-> project; `--project` commits it to one repo so your whole team gets it.
-
 ### Manually
 
 Copy `skills/onboard-me/` into `~/.claude/skills/` (personal) or
