@@ -75,15 +75,12 @@ onboard-me/
 ├── .claude-plugin/
 │   ├── plugin.json          # plugin manifest
 │   └── marketplace.json     # single-plugin marketplace catalog
-├── bin/
-│   └── install.js           # npx installer (copies the skill into ~/.claude/skills)
-├── skills/
-│   └── onboard-me/
-│       ├── SKILL.md         # the onboarding procedure
-│       └── references/
-│           ├── stack-detection.md      # manifest → ecosystem lookup
-│           └── onboarding-template.md  # ONBOARDING.md output structure
-└── package.json
+└── skills/
+    └── onboard-me/
+        ├── SKILL.md         # the onboarding procedure
+        └── references/
+            ├── stack-detection.md      # manifest → ecosystem lookup
+            └── onboarding-template.md  # ONBOARDING.md output structure
 ```
 
 ## Contributing
