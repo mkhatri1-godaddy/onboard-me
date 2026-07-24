@@ -41,11 +41,14 @@ Copy `skills/onboard-me/` into `~/.claude/skills/` (personal) or
 
 ## Usage
 
+Open Claude Code in **any** repository and run:
+
 ```
-/onboard-me              # full tour of the current repo
-/onboard-me frontend     # weight the tour toward the frontend
-/onboard-me backend      # ...or backend, devops, data
+/onboard-me
 ```
+
+It works on any codebase — it detects the stack from what's actually in the repo,
+so there's nothing to configure per project.
 
 ## What it does
 
