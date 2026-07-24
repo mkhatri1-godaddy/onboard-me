@@ -15,9 +15,9 @@ No clone, no global install — one command copies the skill into your Claude Co
 skills directory:
 
 ```bash
-npx onboard-me            # install for your user  (~/.claude/skills/onboard-me)
-npx onboard-me --project  # install into the current repo (./.claude/skills/onboard-me)
-npx onboard-me --force    # overwrite an existing install (use to update)
+npx @monish-khatri/onboard-me            # install for your user  (~/.claude/skills/onboard-me)
+npx @monish-khatri/onboard-me --project  # install into the current repo (./.claude/skills/onboard-me)
+npx @monish-khatri/onboard-me --force    # overwrite an existing install (use to update)
 ```
 
 Then start Claude Code in any repository and run `/onboard-me`.

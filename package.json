@@ -1,5 +1,5 @@
 {
-  "name": "onboard-me",
+  "name": "@monish-khatri/onboard-me",
   "version": "0.1.0",
   "description": "Install the onboard-me Claude Code skill: scans a repo, its docs, and git history (read-only) to produce a durable ONBOARDING.md and answer questions about the codebase.",
   "bin": {
