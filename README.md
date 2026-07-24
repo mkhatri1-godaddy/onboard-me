@@ -9,7 +9,32 @@ available to answer questions about how the project works.
 
 ## Install
 
-### With npx (recommended)
+### As a Claude Code plugin (recommended)
+
+Register this repo as a marketplace, then install the plugin from it — no clone,
+no Node required:
+
+```bash
+claude plugin marketplace add mkhatri1-godaddy/onboard-me
+claude plugin install onboard-me@onboard-me-marketplace
+```
+
+Then restart Claude Code and confirm with `claude plugin list`.
+
+> `mkhatri1-godaddy/onboard-me` is the **repo** (the CLI reads
+> `.claude-plugin/marketplace.json` from its root); `onboard-me-marketplace` is
+> the **marketplace name** declared in that file. The plugin itself is
+> `onboard-me`.
+
+Prefer to do it interactively from inside a session? The same flow is available
+as slash commands:
+
+```
+/plugin marketplace add mkhatri1-godaddy/onboard-me
+/plugin install onboard-me@onboard-me-marketplace
+```
+
+### With npx
 
 No clone, no global install — one command copies the skill into your Claude Code
 skills directory:
@@ -24,15 +49,6 @@ Then start Claude Code in any repository and run `/onboard-me`.
 
 > Requires Node ≥ 16.7. Installing per-user makes the skill available in every
 > project; `--project` commits it to one repo so your whole team gets it.
-
-### As a Claude Code plugin
-
-Prefer the plugin/marketplace flow? Add the marketplace and install:
-
-```
-/plugin marketplace add mkhatri1-godaddy/onboard-me
-/plugin install onboard-me@onboard-me-marketplace
-```
 
 ### Manually
 
