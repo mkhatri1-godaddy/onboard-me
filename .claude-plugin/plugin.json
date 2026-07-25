@@ -5,6 +5,9 @@
   "author": {
     "name": "Monish Khatri"
   },
+  "repository": "https://github.com/mkhatri1-godaddy/onboard-me",
+  "homepage": "https://github.com/mkhatri1-godaddy/onboard-me#readme",
+  "license": "MIT",
   "keywords": [
     "onboarding",
     "documentation",

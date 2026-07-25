@@ -19,7 +19,28 @@ claude plugin marketplace add mkhatri1-godaddy/onboard-me
 claude plugin install onboard-me@onboard-me-marketplace
 ```
 
-Then restart Claude Code and confirm with `claude plugin list`.
+Then run `/reload-plugins` in Claude Code (or restart the session) and confirm
+with `claude plugin list`.
+
+### Update or reinstall
+
+To pick up a newer version:
+
+```bash
+claude plugin marketplace update onboard-me-marketplace
+claude plugin update onboard-me@onboard-me-marketplace
+```
+
+Then run `/reload-plugins` in Claude Code.
+
+To reinstall, remove and install again:
+
+```bash
+claude plugin uninstall onboard-me
+claude plugin install onboard-me@onboard-me-marketplace
+```
+
+Then run `/reload-plugins` in Claude Code.
 
 > `mkhatri1-godaddy/onboard-me` is the **repo** (the CLI reads
 > `.claude-plugin/marketplace.json` from its root); `onboard-me-marketplace` is

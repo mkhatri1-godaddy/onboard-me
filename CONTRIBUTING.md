@@ -31,6 +31,24 @@ claude plugin marketplace add ./          # register this checkout as a marketpl
 claude plugin install onboard-me@onboard-me-marketplace
 ```
 
+After editing the skill, refresh your local install:
+
+```bash
+claude plugin marketplace update onboard-me-marketplace
+claude plugin update onboard-me@onboard-me-marketplace
+```
+
+Then run `/reload-plugins` in Claude Code and re-test `/onboard-me`.
+
+To reinstall:
+
+```bash
+claude plugin uninstall onboard-me
+claude plugin install onboard-me@onboard-me-marketplace
+```
+
+Then run `/reload-plugins` in Claude Code.
+
 ## Editing the skill
 
 - Keep it **read-only**: the skill must never run build/install/test commands or

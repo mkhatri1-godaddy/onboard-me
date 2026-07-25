@@ -14,7 +14,7 @@ grounded follow-up questions.
 
 - **Read-only.** Never run build, install, test, or setup commands. Never
   modify source. You may read files and inspect git history. The one file you
-  create is `ONBOARDING.md` (only after confirming with the user — see step 7).
+  create is `ONBOARDING.md` (only after confirming with the user — see step 8).
 - **Cite what's real.** Every command, path, and claim in your output must come
   from a file you actually read or git output you actually ran. If a doc and the
   code disagree, trust the code and flag the discrepancy. Never invent a
