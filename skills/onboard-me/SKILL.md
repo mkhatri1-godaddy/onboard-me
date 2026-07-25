@@ -1,5 +1,6 @@
 ---
 name: onboard-me
+version: 0.1.0
 description: Onboard a developer to the current repository. Scans the codebase, existing docs, and config (read-only) to produce a durable ONBOARDING.md — stack, directory structure, setup, PR process, deployment, and useful links — and then answers questions about how the project works. Use when someone is new to a repo, asks to "onboard me", "explain this codebase", "how do I get started here", or "give me a tour of the repo".
 ---
 
@@ -37,7 +38,8 @@ Build a picture of what exists before reading deeply.
 - Glob for manifests and lockfiles (`package.json`, `pyproject.toml`, `go.mod`,
   `Cargo.toml`, `pom.xml`, `Gemfile`, `composer.json`, etc.).
 - Glob for docs: `README*`, `CONTRIBUTING*`, `ARCHITECTURE*`, `docs/**`,
-  `CLAUDE.md`, `AGENTS.md`, ADRs (`docs/adr/**`, `doc/decisions/**`).
+  `CLAUDE.md`, `AGENTS.md`, `.cursor/rules/**`, `.cursorrules`, ADRs
+  (`docs/adr/**`, `doc/decisions/**`).
 - Glob for config: `.env.example`, `docker-compose*`, `Dockerfile`, CI configs
   (`.github/workflows/**`, `.gitlab-ci.yml`, `.circleci/**`), lint/format
   configs, `Makefile`/`Justfile`/`Taskfile`.
@@ -106,6 +108,13 @@ reference, dashboards, issue tracker, chat channels, project homepage).
   definitions, so the newcomer learns the project's vocabulary.
 
 ### 8. Write the artifact
+
+If `ONBOARDING.md` already exists at the repo root:
+
+- Read it first and note its generation date (from the header if present).
+- Ask the user whether to **refresh** (replace with a new snapshot), **merge**
+  (update stale sections while preserving team additions), or **skip** writing.
+- If refreshing, update the generation date in the header.
 
 Ask the user to confirm before writing (it's the only file you create). Then
 write `ONBOARDING.md` at the repo root using the structure in

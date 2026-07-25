@@ -8,6 +8,7 @@ Code skill distributed as a plugin — so contributing is lightweight.
 - `skills/onboard-me/SKILL.md` — the skill's instructions (the actual behavior).
 - `skills/onboard-me/references/` — lookup tables the skill reads
   (`stack-detection.md`, `onboarding-template.md`).
+- `hooks/` — read-only safety hooks (`hooks.json`, `scripts/enforce-readonly.sh`).
 - `.claude-plugin/` — plugin + marketplace manifests for the `claude plugin` /
   `/plugin` install path.
 
@@ -64,8 +65,13 @@ Then run `/reload-plugins` in Claude Code.
 
 Maintainers cut releases:
 
-1. Bump `version` in `.claude-plugin/plugin.json`.
-2. Commit and tag: `git tag vX.Y.Z && git push --tags`.
+1. Bump `version` in `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`
+   (plugin entry), and the skill frontmatter in `skills/onboard-me/SKILL.md`.
+2. Add an entry to `CHANGELOG.md`.
+3. Commit and tag: `git tag vX.Y.Z && git push --tags`.
+
+With an explicit `version` set, users only receive updates when you bump the
+version and push a new tag.
 
 ## Pull requests
 

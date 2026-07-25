@@ -13,13 +13,18 @@ several rows — record all of them and pick the primary by source-file volume.
 | `package.json` + `bun.lockb` | JavaScript / Node | Bun | |
 | `tsconfig.json` | TypeScript | — | Compiler config; pair with a JS manifest |
 | `pyproject.toml` | Python | Poetry / PDM / uv / hatch | Read `[build-system]` & `[tool.*]` |
+| `uv.lock` | Python | uv | Pair with `pyproject.toml` |
 | `requirements*.txt` | Python | pip | |
 | `Pipfile` / `Pipfile.lock` | Python | pipenv | |
 | `setup.py` / `setup.cfg` | Python | setuptools | Older style |
 | `go.mod` / `go.sum` | Go | go modules | Module path = import root |
 | `Cargo.toml` / `Cargo.lock` | Rust | cargo | `[workspace]` = monorepo |
 | `pom.xml` | Java | Maven | |
+| `mvnw` / `mvnw.cmd` | Java | Maven wrapper | Wrapper-based builds |
 | `build.gradle(.kts)` | Java / Kotlin | Gradle | |
+| `gradlew` / `gradlew.bat` | Java / Kotlin | Gradle wrapper | Wrapper-based builds |
+| `build.sbt` | Scala | sbt | |
+| `Package.swift` | Swift | Swift Package Manager | |
 | `Gemfile` / `Gemfile.lock` | Ruby | Bundler | Rails if `config/routes.rb` |
 | `composer.json` | PHP | Composer | Laravel if `artisan` present |
 | `*.csproj` / `*.sln` | C# / .NET | NuGet / dotnet | |
@@ -27,6 +32,17 @@ several rows — record all of them and pick the primary by source-file volume.
 | `pubspec.yaml` | Dart / Flutter | pub | |
 | `CMakeLists.txt` / `Makefile` | C / C++ | make / cmake | |
 | `deno.json` / `deno.jsonc` | TypeScript / Deno | Deno | |
+| `flake.nix` / `shell.nix` | Nix | nix / nix-shell | Reproducible dev environments |
+
+## Runtime version pinning
+
+| File(s) present | Meaning |
+|---|---|
+| `.tool-versions` | asdf runtime versions |
+| `.nvmrc` / `.node-version` | Node.js version |
+| `.ruby-version` | Ruby version |
+| `.python-version` | Python version |
+| `mise.toml` / `.mise.toml` | mise runtime versions |
 
 ## Framework signals (source-level)
 
@@ -70,3 +86,4 @@ several rows — record all of them and pick the primary by source-file volume.
 | `Dockerfile`, `docker-compose*.yml` | Containerized; compose lists local services |
 | `k8s/**`, `*.yaml` with `kind:` | Kubernetes manifests |
 | `vercel.json`, `netlify.toml`, `fly.toml`, `render.yaml` | PaaS deploy target |
+| `Procfile` | Heroku-style process deploy |

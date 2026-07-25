@@ -10,7 +10,10 @@
     {
       "name": "onboard-me",
       "source": "./",
-      "description": "Scans a repo, its docs, and git history (read-only) to produce a durable ONBOARDING.md and answer questions about the codebase."
+      "version": "0.1.0",
+      "description": "Scans a repo and its docs (read-only) to produce a durable ONBOARDING.md and answer questions about the codebase.",
+      "category": "developer-tools",
+      "tags": ["onboarding", "documentation", "dx"]
     }
   ]
 }
