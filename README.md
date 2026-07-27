@@ -112,6 +112,10 @@ onboard-me/
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Acknowledgments
+
+Big thanks to @c-jmutiiria-godaddy for bringing this topic of discussion.
+
 ## License
 
 [MIT](LICENSE) © Monish Khatri
