@@ -114,7 +114,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Acknowledgments
 
-Big thanks to @c-jmutiiria-godaddy for bringing this topic of discussion.
+Big thanks to [@c-jmutiiria-godaddy](https://github.com/c-jmutiiria-godaddy) for bringing this topic of discussion.
 
 ## License
 
