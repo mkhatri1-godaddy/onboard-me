@@ -3,6 +3,21 @@
 All notable changes to this project are documented here. Version numbers follow
 [Semantic Versioning](https://semver.org/).
 
+## [0.2.0] - 2026-07-27
+
+### Added
+
+- HTML output option: the skill now asks at write time whether to produce
+  `ONBOARDING.md`, a self-contained interactive `ONBOARDING.html`, or both. The
+  HTML page bundles inline CSS/JS (sticky table of contents, collapsible
+  sections, styled tables, copy buttons) with no external dependencies.
+- `references/onboarding-html-template.md` describing the HTML artifact.
+
+### Changed
+
+- Read-only hook now permits writing `ONBOARDING.html` in addition to
+  `ONBOARDING.md`; all other write restrictions are unchanged.
+
 ## [0.1.0] - 2026-07-26
 
 ### Added
@@ -14,4 +29,5 @@ All notable changes to this project are documented here. Version numbers follow
   writes to `ONBOARDING.md`.
 - Marketplace metadata (`category`, `tags`, `version`) and plugin `displayName`.
 
+[0.2.0]: https://github.com/mkhatri1-godaddy/onboard-me/releases/tag/v0.2.0
 [0.1.0]: https://github.com/mkhatri1-godaddy/onboard-me/releases/tag/v0.1.0

@@ -4,8 +4,10 @@ A [Claude Code](https://claude.com/claude-code) skill that gets you productive i
 unfamiliar repository fast.
 
 Run `/onboard-me` in any repo and it scans the codebase, existing docs, and
-configuration — **read-only** — then writes a durable `ONBOARDING.md` and stays
-available to answer questions about how the project works.
+configuration — **read-only** — then writes a durable onboarding doc, as
+Markdown (`ONBOARDING.md`) or a self-contained interactive HTML page
+(`ONBOARDING.html`), and stays available to answer questions about how the
+project works.
 
 ## Install
 
@@ -85,9 +87,13 @@ so there's nothing to configure per project.
 - **Builds a reading list & glossary** — an ordered path into the code and the
   project's vocabulary.
 - **Flags stale docs** — mismatches between documentation and the actual code.
+- **Outputs Markdown or HTML** — pick `ONBOARDING.md` (diff-friendly, renders on
+  GitHub) or a single self-contained `ONBOARDING.html` with a sticky table of
+  contents, collapsible sections, and styled tables — nicer to read and shareable
+  as a link. It asks at write time; you can also pass `html` to the command.
 
-It's read-only: the only file it writes is `ONBOARDING.md`, and only after you
-confirm.
+It's read-only: the only file it writes is your chosen onboarding doc
+(`ONBOARDING.md` or `ONBOARDING.html`), and only after you confirm.
 
 ## Structure
 
@@ -104,8 +110,9 @@ onboard-me/
     └── onboard-me/
         ├── SKILL.md         # the onboarding procedure
         └── references/
-            ├── stack-detection.md      # manifest → ecosystem lookup
-            └── onboarding-template.md  # ONBOARDING.md output structure
+            ├── stack-detection.md          # manifest → ecosystem lookup
+            ├── onboarding-template.md       # ONBOARDING.md output structure
+            └── onboarding-html-template.md  # ONBOARDING.html output structure
 ```
 
 ## Contributing

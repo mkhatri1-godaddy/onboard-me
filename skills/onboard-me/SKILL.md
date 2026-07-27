@@ -1,7 +1,7 @@
 ---
 name: onboard-me
-version: 0.1.0
-description: Onboard a developer to the current repository. Scans the codebase, existing docs, and config (read-only) to produce a durable ONBOARDING.md — stack, directory structure, setup, PR process, deployment, and useful links — and then answers questions about how the project works. Use when someone is new to a repo, asks to "onboard me", "explain this codebase", "how do I get started here", or "give me a tour of the repo".
+version: 0.2.0
+description: Onboard a developer to the current repository. Scans the codebase, existing docs, and config (read-only) to produce a durable onboarding doc as Markdown (ONBOARDING.md) or a self-contained interactive HTML page (ONBOARDING.html) — stack, directory structure, setup, PR process, deployment, and useful links — and then answers questions about how the project works. Use when someone is new to a repo, asks to "onboard me", "explain this codebase", "how do I get started here", or "give me a tour of the repo".
 ---
 
 # Repository Onboarding
@@ -14,8 +14,9 @@ grounded follow-up questions.
 ## Operating rules
 
 - **Read-only.** Never run build, install, test, or setup commands. Never
-  modify source. You may read files and inspect git history. The one file you
-  create is `ONBOARDING.md` (only after confirming with the user — see step 8).
+  modify source. You may read files and inspect git history. The one artifact you
+  create is the onboarding doc — `ONBOARDING.md` or `ONBOARDING.html` (only after
+  confirming with the user — see step 8).
 - **Cite what's real.** Every command, path, and claim in your output must come
   from a file you actually read or git output you actually ran. If a doc and the
   code disagree, trust the code and flag the discrepancy. Never invent a
@@ -109,17 +110,37 @@ reference, dashboards, issue tracker, chat channels, project homepage).
 
 ### 8. Write the artifact
 
-If `ONBOARDING.md` already exists at the repo root:
+**Choose the format.** Ask the user which output they want:
+
+- **Markdown** (`ONBOARDING.md`) — versionable, diff-friendly, renders in the
+  repo and on GitHub. The default if the user has no preference.
+- **HTML** (`ONBOARDING.html`) — a single self-contained, interactive page
+  (sticky table of contents, collapsible sections, styled tables). Nicer to read
+  and shareable as a link; see the argument in
+  [the-unreasonable-effectiveness-of-html](https://claude.com/blog/using-claude-code-the-unreasonable-effectiveness-of-html).
+- **Both** — write both files from the same findings.
+
+If the user passed a format in their invocation (e.g. `/onboard-me html`), honor
+it and skip the question.
+
+**Handle an existing artifact.** For each format you're about to write, if the
+target file (`ONBOARDING.md` and/or `ONBOARDING.html`) already exists at the repo
+root:
 
 - Read it first and note its generation date (from the header if present).
 - Ask the user whether to **refresh** (replace with a new snapshot), **merge**
   (update stale sections while preserving team additions), or **skip** writing.
 - If refreshing, update the generation date in the header.
 
-Ask the user to confirm before writing (it's the only file you create). Then
-write `ONBOARDING.md` at the repo root using the structure in
-`references/onboarding-template.md`. Fill every section from your findings; omit
-a section only if genuinely not applicable, and say so.
+Ask the user to confirm before writing (these are the only files you create).
+Then write the chosen artifact(s) at the repo root:
+
+- For Markdown, use the structure in `references/onboarding-template.md`.
+- For HTML, use `references/onboarding-html-template.md` — a single file with
+  inline CSS/JS and **no external dependencies or network calls**.
+
+Both carry the same nine sections plus the stale-docs flag. Fill every section
+from your findings; omit a section only if genuinely not applicable, and say so.
 
 ### 9. Offer Q&A
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # PreToolUse hook for onboard-me: enforce read-only repo investigation.
-# Allows writes only to ONBOARDING.md; blocks install/build/test/run commands.
+# Allows writes only to ONBOARDING.md / ONBOARDING.html; blocks install/build/test/run commands.
 set -euo pipefail
 
 input=$(cat)
@@ -76,8 +76,8 @@ case "$tool_name" in
     file_path=$(printf '%s' "$input" | jq -r '.tool_input.file_path // ""')
     basename=$(basename "$file_path")
 
-    if [[ "$basename" != "ONBOARDING.md" ]]; then
-      deny "onboard-me may only write ONBOARDING.md. Blocked edit to: $file_path"
+    if [[ "$basename" != "ONBOARDING.md" && "$basename" != "ONBOARDING.html" ]]; then
+      deny "onboard-me may only write ONBOARDING.md or ONBOARDING.html. Blocked edit to: $file_path"
     fi
     ;;
 

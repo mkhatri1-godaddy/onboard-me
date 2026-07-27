@@ -1,5 +1,5 @@
 {
-  "description": "Enforce read-only onboarding: block install/build/test commands and restrict writes to ONBOARDING.md",
+  "description": "Enforce read-only onboarding: block install/build/test commands and restrict writes to ONBOARDING.md / ONBOARDING.html",
   "hooks": {
     "PreToolUse": [
       {

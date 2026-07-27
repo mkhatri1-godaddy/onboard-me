@@ -1,8 +1,8 @@
 {
   "name": "onboard-me",
   "displayName": "Onboard Me",
-  "version": "0.1.0",
-  "description": "Onboard yourself to any repository. Scans the codebase, docs, and config to produce a durable ONBOARDING.md and answer questions about how the project works.",
+  "version": "0.2.0",
+  "description": "Onboard yourself to any repository. Scans the codebase, docs, and config to produce a durable onboarding doc (Markdown or self-contained interactive HTML) and answer questions about how the project works.",
   "author": {
     "name": "Monish Khatri"
   },
