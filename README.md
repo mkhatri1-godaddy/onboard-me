@@ -102,10 +102,6 @@ onboard-me/
 ├── .claude-plugin/
 │   ├── plugin.json          # plugin manifest
 │   └── marketplace.json     # single-plugin marketplace catalog
-├── hooks/
-│   ├── hooks.json           # read-only safety hooks
-│   └── scripts/
-│       └── enforce-readonly.sh
 └── skills/
     └── onboard-me/
         ├── SKILL.md         # the onboarding procedure

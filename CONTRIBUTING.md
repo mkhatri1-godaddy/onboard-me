@@ -8,7 +8,6 @@ Code skill distributed as a plugin — so contributing is lightweight.
 - `skills/onboard-me/SKILL.md` — the skill's instructions (the actual behavior).
 - `skills/onboard-me/references/` — lookup tables the skill reads
   (`stack-detection.md`, `onboarding-template.md`).
-- `hooks/` — read-only safety hooks (`hooks.json`, `scripts/enforce-readonly.sh`).
 - `.claude-plugin/` — plugin + marketplace manifests for the `claude plugin` /
   `/plugin` install path.
 

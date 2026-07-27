@@ -3,6 +3,16 @@
 All notable changes to this project are documented here. Version numbers follow
 [Semantic Versioning](https://semver.org/).
 
+## [0.2.1] - 2026-07-27
+
+### Removed
+
+- Read-only enforcement hook (`hooks/`). It was a plugin-level `PreToolUse` hook,
+  so it stayed active for **every** session and repo while the plugin was
+  enabled — blocking unrelated edits (e.g. in other repos) long after onboarding
+  finished. The skill's read-only behavior is now guaranteed by its instructions
+  in `SKILL.md` rather than a session-wide hook.
+
 ## [0.2.0] - 2026-07-27
 
 ### Added
@@ -29,5 +39,6 @@ All notable changes to this project are documented here. Version numbers follow
   writes to `ONBOARDING.md`.
 - Marketplace metadata (`category`, `tags`, `version`) and plugin `displayName`.
 
+[0.2.1]: https://github.com/mkhatri1-godaddy/onboard-me/releases/tag/v0.2.1
 [0.2.0]: https://github.com/mkhatri1-godaddy/onboard-me/releases/tag/v0.2.0
 [0.1.0]: https://github.com/mkhatri1-godaddy/onboard-me/releases/tag/v0.1.0

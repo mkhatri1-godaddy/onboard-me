@@ -10,7 +10,7 @@
     {
       "name": "onboard-me",
       "source": "./",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "description": "Scans a repo and its docs (read-only) to produce a durable onboarding doc (Markdown or interactive HTML) and answer questions about the codebase.",
       "category": "developer-tools",
       "tags": ["onboarding", "documentation", "dx"]

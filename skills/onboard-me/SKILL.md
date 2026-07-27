@@ -1,6 +1,6 @@
 ---
 name: onboard-me
-version: 0.2.0
+version: 0.2.1
 description: Onboard a developer to the current repository. Scans the codebase, existing docs, and config (read-only) to produce a durable onboarding doc as Markdown (ONBOARDING.md) or a self-contained interactive HTML page (ONBOARDING.html) — stack, directory structure, setup, PR process, deployment, and useful links — and then answers questions about how the project works. Use when someone is new to a repo, asks to "onboard me", "explain this codebase", "how do I get started here", or "give me a tour of the repo".
 ---
 
