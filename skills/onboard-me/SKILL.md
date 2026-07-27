@@ -1,6 +1,6 @@
 ---
 name: onboard-me
-version: 0.2.1
+version: 0.2.2
 description: Onboard a developer to the current repository. Scans the codebase, existing docs, and config (read-only) to produce a durable onboarding doc as Markdown (ONBOARDING.md) or a self-contained interactive HTML page (ONBOARDING.html) — stack, directory structure, setup, PR process, deployment, and useful links — and then answers questions about how the project works. Use when someone is new to a repo, asks to "onboard me", "explain this codebase", "how do I get started here", or "give me a tour of the repo".
 ---
 
@@ -34,6 +34,10 @@ Work through these steps in order. Announce the phase you're in, then act.
 
 Build a picture of what exists before reading deeply.
 
+- **Measure size first, then choose your mode.** Before reading any file
+  contents, run the size gate in "Scaling to large repos" below. If it trips,
+  run steps 2–7 via the delegated (subagent) workflow described there instead of
+  inline. Otherwise continue inline as written.
 - List the top two levels of the directory tree; note the important dirs
   (source, tests, infra, docs, scripts).
 - Glob for manifests and lockfiles (`package.json`, `pyproject.toml`, `go.mod`,
@@ -147,6 +151,87 @@ from your findings; omit a section only if genuinely not applicable, and say so.
 After writing, tell the user the doc is ready and invite grounded questions
 ("ask me anything about this repo"). Answer from files you read; read more as
 needed. Keep answers anchored to real paths.
+
+## Scaling to large repos
+
+Steps 1–7 read a lot. On a small or medium repo that's fine to do inline. On a
+large repo, reading manifests, walking every significant directory, and pulling
+docs into one context crowds out synthesis (steps 7–8) and Q&A (step 9), and it's
+slow. Past a size gate, delegate the read-heavy scanning to parallel subagents
+that return findings — not file contents — keeping the main context free for
+assembly and questions.
+
+### Size gate
+
+As the first action in step 1, measure the repo cheaply (filenames only, no
+contents):
+
+- `git ls-files | wc -l` — tracked file count.
+- Check for monorepo markers: `workspaces` in `package.json`,
+  `pnpm-workspace.yaml`, `lerna.json`, `nx.json`, `turbo.json`, Cargo/Go
+  workspaces.
+
+Enter **delegated mode** if **either** of these holds (the threshold is a
+tunable default — adjust after running on your own repos):
+
+- tracked files **> 2,500**, OR
+- any monorepo marker is present.
+
+The monorepo condition matters even well under the file threshold: a
+workspaces/Turbo/Nx repo is many packages regardless of its file count, and the
+file gate alone would miss it.
+
+Otherwise run steps 1–9 inline as written.
+
+### Delegated mode
+
+1. **Inventory (main agent).** Finish step 1 yourself — the top-level map you
+   just built is the partition boundary. Do not read file *contents* yet.
+2. **Fan out scouts (parallel, one message).** Spawn read-only `Explore`
+   subagents, one per template-section group (see roster below). Each scans only
+   its own sources and returns its section. `Explore` cannot write or edit, so
+   delegation preserves the skill's read-only guarantee.
+3. **Synthesize (main agent).** Merge the returns, then produce the three parts
+   that need the whole picture at once: §8 reading list, §9 glossary (from every
+   scout's `candidate_glossary_terms`), and the ⚠️ stale-docs flag (from every
+   scout's `mismatches_noticed`). Do one light coherence pass over the merged
+   sections, then write the artifact (step 8) and offer Q&A (step 9).
+4. **Q&A (main agent).** Answer each question by spawning a scoped `Explore`
+   rather than pre-loading files, so Q&A stays cheap regardless of repo size.
+
+### Scout roster
+
+Dispatch these five in a single message so they run concurrently:
+
+| Scout | Owns | Primary sources |
+|---|---|---|
+| Overview & stack | §1 | README, manifests, `references/stack-detection.md` |
+| Structure | §2 | directory walk, entry points |
+| Setup | §3 | README, CONTRIBUTING, Makefile/task runner, manifest scripts, `.env.example`, docker-compose |
+| Process | §4 Conventions, §5 PR, §6 Deployment | CONTRIBUTING, CLAUDE.md, PR templates, CI configs, Dockerfile, platform configs |
+| Docs & links | §7 | README links, `docs/**`, ADRs |
+
+If a section's sources are absent, the scout returns that section's documented
+"none found" note (per the template) rather than inventing content.
+
+### Scout output schema
+
+Instruct every scout to return exactly this shape, and nothing else:
+
+- `section_markdown` — the finished Markdown for its owned section(s), filled
+  from `references/onboarding-template.md`.
+- `citations` — the real file paths (with line ranges where useful) backing every
+  claim. A claim with no citation is dropped, not guessed.
+- `candidate_glossary_terms` — domain terms the scout saw, each with a one-line
+  gloss and where it appeared. Feeds §9.
+- `mismatches_noticed` — doc/code discrepancies in its area (stale commands, env
+  vars used in code but missing from `.env.example`, documented scripts absent
+  from the manifest). Feeds the ⚠️ stale-docs flag.
+
+Scouts return summaries and cited paths only — never raw file dumps. That is what
+keeps the main context small; a few files (e.g. README) being read by more than
+one scout is fine, because it happens in the scouts' isolated contexts, not the
+main one.
 
 ## Tailoring (optional)
 
