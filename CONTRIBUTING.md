@@ -29,14 +29,14 @@ make sure the tour and `ONBOARDING.md` output hold up:
 
 ```bash
 claude plugin marketplace add ./          # register this checkout as a marketplace
-claude plugin install onboard-me@onboard-me-marketplace
+claude plugin install onboard-me@mkhatri1-godaddy
 ```
 
 After editing the skill, refresh your local install:
 
 ```bash
-claude plugin marketplace update onboard-me-marketplace
-claude plugin update onboard-me@onboard-me-marketplace
+claude plugin marketplace update mkhatri1-godaddy
+claude plugin update onboard-me@mkhatri1-godaddy
 ```
 
 Then run `/reload-plugins` in Claude Code and re-test `/onboard-me`.
@@ -45,7 +45,7 @@ To reinstall:
 
 ```bash
 claude plugin uninstall onboard-me
-claude plugin install onboard-me@onboard-me-marketplace
+claude plugin install onboard-me@mkhatri1-godaddy
 ```
 
 Then run `/reload-plugins` in Claude Code.

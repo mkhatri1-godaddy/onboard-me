@@ -16,7 +16,7 @@ no Node required:
 
 ```bash
 claude plugin marketplace add mkhatri1-godaddy/onboard-me
-claude plugin install onboard-me@onboard-me-marketplace
+claude plugin install onboard-me@mkhatri1-godaddy
 ```
 
 Then run `/reload-plugins` in Claude Code (or restart the session) and confirm
@@ -27,8 +27,8 @@ with `claude plugin list`.
 To pick up a newer version:
 
 ```bash
-claude plugin marketplace update onboard-me-marketplace
-claude plugin update onboard-me@onboard-me-marketplace
+claude plugin marketplace update mkhatri1-godaddy
+claude plugin update onboard-me@mkhatri1-godaddy
 ```
 
 Then run `/reload-plugins` in Claude Code.
@@ -37,13 +37,13 @@ To reinstall, remove and install again:
 
 ```bash
 claude plugin uninstall onboard-me
-claude plugin install onboard-me@onboard-me-marketplace
+claude plugin install onboard-me@mkhatri1-godaddy
 ```
 
 Then run `/reload-plugins` in Claude Code.
 
 > `mkhatri1-godaddy/onboard-me` is the **repo** (the CLI reads
-> `.claude-plugin/marketplace.json` from its root); `onboard-me-marketplace` is
+> `.claude-plugin/marketplace.json` from its root); `mkhatri1-godaddy` is
 > the **marketplace name** declared in that file. The plugin itself is
 > `onboard-me`.
 
@@ -52,7 +52,7 @@ as slash commands:
 
 ```
 /plugin marketplace add mkhatri1-godaddy/onboard-me
-/plugin install onboard-me@onboard-me-marketplace
+/plugin install onboard-me@mkhatri1-godaddy
 ```
 
 ### Manually
