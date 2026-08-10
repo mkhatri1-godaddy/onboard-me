@@ -1,6 +1,6 @@
 ---
 name: onboard-me
-version: 1.0.3
+version: 1.0.4
 description: Onboard a developer to the current repository. Scans the codebase, existing docs, and config (read-only) to produce a durable onboarding doc as Markdown (ONBOARDING.md) or a self-contained interactive HTML page (ONBOARDING.html) — stack, directory structure, setup, PR process, deployment, and useful links — and then answers questions about how the project works. Use when someone is new to a repo, asks to "onboard me", "explain this codebase", "how do I get started here", or "give me a tour of the repo".
 ---
 
@@ -16,11 +16,15 @@ grounded follow-up questions.
 - **Read-only.** Never run build, install, test, or setup commands. Never
   modify source. You may read files and inspect git history. The one artifact you
   create is the onboarding doc — `ONBOARDING.md` or `ONBOARDING.html` (only after
-  confirming with the user — see step 8).
-- **Cite what's real.** Every command, path, and claim in your output must come
-  from a file you actually read or git output you actually ran. If a doc and the
-  code disagree, trust the code and flag the discrepancy. Never invent a
-  quickstart command that isn't in the repo.
+  confirming with the user — see step 9).
+- **Cite what's real.** Every command, path, symbol, and claim in your output
+  must come from a file you actually read or git output you actually ran. This
+  includes code behavior: don't describe a function, method, or API — or say how
+  something works — unless you've located it in source, and don't call something
+  "used" or "called" unless you've found the call site. If a doc and the code
+  disagree, trust the code and flag the discrepancy. Never invent a quickstart
+  command that isn't in the repo. Before writing, run the fact-check gate in
+  step 8 — an unverifiable claim gets deleted, not hedged.
 - **Language-agnostic.** Detect the stack from what's present; don't assume.
   Use `references/stack-detection.md` as the lookup table.
 - **Be concise in chat.** The detailed synthesis goes in the artifact, not the
@@ -112,7 +116,37 @@ reference, dashboards, issue tracker, chat channels, project homepage).
 - **Glossary** — domain-specific terms found in code/docs, with plain-language
   definitions, so the newcomer learns the project's vocabulary.
 
-### 8. Write the artifact
+### 8. Verify every claim against source (fact-check gate)
+
+Before writing anything, do a dedicated pass over your drafted content and
+confirm each concrete claim traces to something you actually observed. This is
+where a hallucinated specific — a method, flag, script, or env var that sounds
+right but isn't in the repo — gets caught and removed. It is the difference
+between "reads plausibly" and "is true," and skipping it is how a never-used
+method ends up documented as how the code works.
+
+For each claim type, verify it exists where you say it does:
+
+- **Commands** (install/build/run/test) — present verbatim in a manifest
+  script, Makefile/task runner, README, or CONTRIBUTING. Don't normalize or
+  "correct" them into what you'd expect.
+- **Code references** (functions, methods, classes, APIs, entry points) — grep
+  for the symbol and confirm it's defined where you claim. If you state it's
+  *used* or *called*, confirm a call site exists. Never describe a method as the
+  way something works unless you found it actually invoked.
+- **Paths** — the file/dir exists (you listed or read it).
+- **Env vars** — present in `.env.example`, config, or referenced in code.
+- **Links** — sourced from a file you read, not guessed.
+
+Rule: if a claim can't be traced to a file you read or a command you ran, delete
+it — do not soften it into a hedge. An unverifiable statement is dropped, not
+reworded. When code and docs disagree, keep the code's version and record the
+doc's in the ⚠️ stale-docs section.
+
+In delegated mode this gate is the scouts' `citations` contract: any claim a
+scout returns without a citation is dropped at synthesis, never guessed back in.
+
+### 9. Write the artifact
 
 **Choose the format.** Ask the user which output they want:
 
@@ -146,7 +180,7 @@ Then write the chosen artifact(s) at the repo root:
 Both carry the same nine sections plus the stale-docs flag. Fill every section
 from your findings; omit a section only if genuinely not applicable, and say so.
 
-### 9. Offer Q&A
+### 10. Offer Q&A
 
 After writing, tell the user the doc is ready and invite grounded questions
 ("ask me anything about this repo"). Answer from files you read; read more as
@@ -156,8 +190,8 @@ needed. Keep answers anchored to real paths.
 
 Steps 1–7 read a lot. On a small or medium repo that's fine to do inline. On a
 large repo, reading manifests, walking every significant directory, and pulling
-docs into one context crowds out synthesis (steps 7–8) and Q&A (step 9), and it's
-slow. Past a size gate, delegate the read-heavy scanning to parallel subagents
+docs into one context crowds out synthesis (steps 7–9) and Q&A (step 10), and
+it's slow. Past a size gate, delegate the read-heavy scanning to parallel subagents
 that return findings — not file contents — keeping the main context free for
 assembly and questions.
 
@@ -181,7 +215,7 @@ The monorepo condition matters even well under the file threshold: a
 workspaces/Turbo/Nx repo is many packages regardless of its file count, and the
 file gate alone would miss it.
 
-Otherwise run steps 1–9 inline as written.
+Otherwise run steps 1–10 inline as written.
 
 ### Delegated mode
 
@@ -195,7 +229,8 @@ Otherwise run steps 1–9 inline as written.
    that need the whole picture at once: §8 reading list, §9 glossary (from every
    scout's `candidate_glossary_terms`), and the ⚠️ stale-docs flag (from every
    scout's `mismatches_noticed`). Do one light coherence pass over the merged
-   sections, then write the artifact (step 8) and offer Q&A (step 9).
+   sections, run the fact-check gate (step 8) — dropping any claim a scout left
+   uncited — then write the artifact (step 9) and offer Q&A (step 10).
 4. **Q&A (main agent).** Answer each question by spawning a scoped `Explore`
    rather than pre-loading files, so Q&A stays cheap regardless of repo size.
 

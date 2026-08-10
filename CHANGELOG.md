@@ -3,6 +3,28 @@
 All notable changes to this project are documented here. Version numbers follow
 [Semantic Versioning](https://semver.org/).
 
+## [1.0.4] - 2026-08-10
+
+### Added
+
+- Fact-check gate (step 8). Before writing the artifact, the skill now runs a
+  dedicated verification pass over every drafted claim — commands, code
+  references (functions/methods/APIs), paths, env vars, and links — and deletes
+  any that can't be traced to a file it read or a command it ran. This closes a
+  gap where a synthesized specific (e.g. a method that is referenced but never
+  actually called) could be documented as how the code works. In delegated mode
+  the gate is enforced as the scouts' citation contract: uncited claims are
+  dropped at synthesis rather than guessed back in.
+
+### Changed
+
+- Strengthened the "Cite what's real" rule to cover code behavior, not just
+  commands: don't describe a function/method/API or call it "used" without
+  locating it (and its call site) in source. An unverifiable claim is deleted,
+  not hedged.
+- Generated-doc header note now says to verify commands **and code references**
+  against source (both Markdown and HTML templates).
+
 ## [1.0.3] - 2026-07-27
 
 ### Added
@@ -51,6 +73,7 @@ All notable changes to this project are documented here. Version numbers follow
   writes to `ONBOARDING.md`.
 - Marketplace metadata (`category`, `tags`, `version`) and plugin `displayName`.
 
+[1.0.4]: https://github.com/mkhatri1-godaddy/onboard-me/releases/tag/v1.0.4
 [1.0.3]: https://github.com/mkhatri1-godaddy/onboard-me/releases/tag/v1.0.3
 [1.0.2]: https://github.com/mkhatri1-godaddy/onboard-me/releases/tag/v1.0.2
 [1.0.1]: https://github.com/mkhatri1-godaddy/onboard-me/releases/tag/v1.0.1
