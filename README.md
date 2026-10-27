@@ -1,5 +1,17 @@
 # onboard-me
 
+> [!IMPORTANT]
+> **This skill has moved to [gdcorp-wordpress/managewp-ai-tools](https://github.com/gdcorp-wordpress/managewp-ai-tools/tree/main/skills/onboard-me).**
+> New versions are released there. This repo is no longer maintained, and the
+> plugin install below stays at v1.0.3.
+>
+> To install from the new location:
+>
+> ```bash
+> git clone https://github.com/gdcorp-wordpress/managewp-ai-tools.git
+> cp -R managewp-ai-tools/skills/onboard-me ~/.claude/skills/
+> ```
+
 A [Claude Code](https://claude.com/claude-code) skill that gets you productive in an
 unfamiliar repository fast.
 
